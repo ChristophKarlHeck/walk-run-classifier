@@ -21,13 +21,13 @@ class ActivityClassifier(
 
     // --- Critical: These MUST match your model's specifications ---
     // You MUST find these values from your model (e.g., using Netron or model documentation)
-    private val modelExpectedInputSamples: Int = 100 // EXAMPLE: Number of time steps (e.g., 100 accelerometer readings)
+    val modelExpectedInputSamples: Int = 200 // EXAMPLE: Number of time steps (e.g., 100 accelerometer readings)
     private val modelFeaturesPerSample: Int = 3      // EXAMPLE: Number of features per time step (e.g., x, y, z)
-    private val numOutputClasses: Int = 2            // EXAMPLE: "Walking", "Running"
+    private val numOutputClasses: Int = 6            // EXAMPLE: "Walking", "Running"
     // --- End Critical Model Specifications ---
 
     // Define the labels for your output classes in the correct order
-    private val classLabels = listOf("Walking", "Running") // Adjust if your model has more/different classes
+    private val classLabels = listOf("Downstairs", "Jogging", "Sitting", "Standing", "Upstairs", "Walking") // Adjust if your model has more/different classes
 
     private lateinit var inputByteBuffer: ByteBuffer
     private lateinit var outputBuffer: Array<FloatArray> // For models outputting probabilities per class
