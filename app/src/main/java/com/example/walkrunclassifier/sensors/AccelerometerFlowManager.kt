@@ -43,6 +43,7 @@ class AccelerometerFlowManager(private val context: Context, private val scope: 
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
+                    Log.d("timestamp", "Timestemp: ${event.timestamp}")
                     trySend(
                         AccelerometerData(
                             timestamp = event.timestamp, // Time in nanoseconds

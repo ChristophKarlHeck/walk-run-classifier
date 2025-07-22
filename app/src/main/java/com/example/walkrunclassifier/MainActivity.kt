@@ -114,29 +114,9 @@ class MainActivity : ComponentActivity() {
             Log.d(MAIN_ACTIVITY_TAG, "Current Guess: $currentActivityGuess based on avg magnitude: $avgMagnitude")
         }
     }
-
     // Optional: Cancel the job in onDestroy, though launchIn(lifecycleScope) handles this.
     // override fun onDestroy() {
     //     super.onDestroy()
     //     windowedDataJob?.cancel()
     // }
 }
-
-// Keep your Greeting and Preview if you want to use them elsewhere,
-// or adapt the UI inside setContent as shown in the Column example.
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//    println("ON Preview")
-//    WalkRunClassifierTheme {
-//        Greeting("Android")
-//    }
-//}
