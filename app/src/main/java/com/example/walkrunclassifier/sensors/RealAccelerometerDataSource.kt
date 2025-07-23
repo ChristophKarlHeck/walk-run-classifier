@@ -10,6 +10,7 @@ import androidx.compose.ui.input.key.type
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import com.example.walkrunclassifier.util.convertAndClampToMilliG
 
 private const val REAL_DS_TAG = "RealAccelDataSource"
 
@@ -31,12 +32,17 @@ class RealAccelerometerDataSource(private val context: Context) : AccelerometerD
         val listener = object : SensorEventListener {
             override fun onSensorChanged(event: SensorEvent?) {
                 if (event?.sensor?.type == Sensor.TYPE_ACCELEROMETER) {
+
+                    val x_mg = convertAndClampToMilliG(event.values[0])
+                    val y_mg = convertAndClampToMilliG(event.values[1])
+                    val z_mg = convertAndClampToMilliG(event.values[2])
+
                     trySend(
                         AccelerometerData(
                             timestamp = event.timestamp,
-                            x = event.values[0],
-                            y = event.values[1],
-                            z = event.values[2]
+                            x = x_mg,
+                            y = y_mg,
+                            z = z_mg
                         )
                     ).isSuccess // Or handle failure if channel is closed
                 }
