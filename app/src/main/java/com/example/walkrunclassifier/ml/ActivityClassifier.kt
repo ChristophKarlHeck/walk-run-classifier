@@ -21,13 +21,13 @@ class ActivityClassifier(
 
     // --- Critical: These MUST match your model's specifications ---
     // You MUST find these values from your model (e.g., using Netron or model documentation)
-    val modelExpectedInputSamples: Int = 200 // EXAMPLE: Number of time steps (e.g., 100 accelerometer readings)
+    val modelExpectedInputSamples: Int = 260 // EXAMPLE: Number of time steps (e.g., 100 accelerometer readings)
     private val modelFeaturesPerSample: Int = 3      // EXAMPLE: Number of features per time step (e.g., x, y, z)
-    private val numOutputClasses: Int = 6            // EXAMPLE: "Walking", "Running"
+    private val numOutputClasses: Int = 3            // EXAMPLE: "Stationary", "Walking", "Running"
     // --- End Critical Model Specifications ---
 
     // Define the labels for your output classes in the correct order
-    private val classLabels = listOf("Downstairs", "Jogging", "Sitting", "Standing", "Upstairs", "Walking") // Adjust if your model has more/different classes
+    private val classLabels = listOf("stationary", "walking", "running") // Adjust if your model has more/different classes
 
     private lateinit var inputByteBuffer: ByteBuffer
     private lateinit var outputBuffer: Array<FloatArray> // For models outputting probabilities per class
@@ -102,9 +102,9 @@ class ActivityClassifier(
             // (e.g., values scaled to [-1, 1] or Z-score normalized),
             // you MUST apply the *exact same* transformation here.
             // Example (no normalization, using raw values - adapt as needed):
-            val xProcessed = reading.x // Potentially: (reading.x - meanX) / stdDevX
-            val yProcessed = reading.y // Potentially: (reading.y - meanY) / stdDevY
-            val zProcessed = reading.z // Potentially: (reading.z - meanZ) / stdDevZ
+            val xProcessed = reading.x / 4000
+            val yProcessed = reading.y / 4000
+            val zProcessed = reading.z / 4000
 
             inputByteBuffer.putFloat(xProcessed)
             inputByteBuffer.putFloat(yProcessed)
