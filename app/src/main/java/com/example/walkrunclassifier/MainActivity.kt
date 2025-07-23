@@ -38,7 +38,7 @@ private const val ACC_WINDOW_SIZE = DESIRED_WINDOW_DURATION_SECONDS * SENSOR_SAM
 private const val ACC_WINDOW_STEP = CLASSIFICATION_INTERVAL_SECONDS * SENSOR_SAMPLING_RATE_HZ
 
 private const val MAIN_ACTIVITY_TAG = "MainActivity"
-private const val TFLITE_MODEL_FILENAME = "ml/model.tflite" // Or your actual path
+private const val TFLITE_MODEL_FILENAME = "model.tflite" // Or your actual path
 
 class MainActivity : ComponentActivity() {
 

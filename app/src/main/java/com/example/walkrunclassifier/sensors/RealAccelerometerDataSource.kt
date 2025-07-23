@@ -34,9 +34,9 @@ class RealAccelerometerDataSource(private val context: Context) : AccelerometerD
                     trySend(
                         AccelerometerData(
                             timestamp = event.timestamp,
-                            x = event.values[0] * 1000,
-                            y = event.values[1] * 1000,
-                            z = event.values[2] * 1000
+                            x = event.values[0],
+                            y = event.values[1],
+                            z = event.values[2]
                         )
                     ).isSuccess // Or handle failure if channel is closed
                 }
