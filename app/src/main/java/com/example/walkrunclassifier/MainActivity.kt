@@ -30,9 +30,9 @@ import kotlinx.coroutines.withContext
 import com.example.walkrunclassifier.ml.AccelerometerReading as ModelInputReading
 
 // Constants
-private const val DESIRED_WINDOW_DURATION_SECONDS = 10
+private const val DESIRED_WINDOW_DURATION_SECONDS = 10 // 10s
 private const val SENSOR_SAMPLING_RATE_HZ = 26 // Approximate for SENSOR_DELAY_GAME
-private const val CLASSIFICATION_INTERVAL_SECONDS = 1
+private const val CLASSIFICATION_INTERVAL_SECONDS = 1 // 1s
 
 private const val ACC_WINDOW_SIZE = DESIRED_WINDOW_DURATION_SECONDS * SENSOR_SAMPLING_RATE_HZ
 private const val ACC_WINDOW_STEP = CLASSIFICATION_INTERVAL_SECONDS * SENSOR_SAMPLING_RATE_HZ
@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
         // Use the test instance if provided, otherwise create the real one.
         accelerometerFlowManager = testAccelerometerFlowManager ?: AccelerometerFlowManager(
             sharedScope = lifecycleScope, // Use activity's lifecycle scope for the manager's shared flow
-            dataSource = RealAccelerometerDataSource(applicationContext)
+            dataSource = RealAccelerometerDataSource(applicationContext, SENSOR_SAMPLING_RATE_HZ)
         )
 
         // Start collecting data only if the classifier initialized successfully

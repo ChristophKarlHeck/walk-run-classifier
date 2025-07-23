@@ -14,7 +14,11 @@ import com.example.walkrunclassifier.util.convertAndClampToMilliG
 
 private const val REAL_DS_TAG = "RealAccelDataSource"
 
-class RealAccelerometerDataSource(private val context: Context) : AccelerometerDataSource {
+class RealAccelerometerDataSource(
+    private val context: Context,
+    private val desiredFrequencyHz: Int) : AccelerometerDataSource {
+
+    private val desiredSamplingPeriodUs: Int = (1000000 / desiredFrequencyHz)
 
     private val sensorManager: SensorManager by lazy {
         context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -63,7 +67,7 @@ class RealAccelerometerDataSource(private val context: Context) : AccelerometerD
         sensorManager.registerListener(
             listener,
             accelerometerSensor,
-            SensorManager.SENSOR_DELAY_GAME
+            desiredSamplingPeriodUs
         )
 
         awaitClose {
