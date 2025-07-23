@@ -22,6 +22,9 @@
       <SelectionState runConfigName="testStationaryActivity_fromCsv()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="testWalkingActivity_fromCsv()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>

@@ -133,4 +133,44 @@ class ExampleInstrumentedTest {
 
         scenario.close()
     }
+
+    @Test
+    fun testRunningActivity_fromCsv() {
+        val testContext = InstrumentationRegistry.getInstrumentation().targetContext
+        val csvFileName = "running.csv"
+
+        // Read data from file with ~26 Hz
+        val hz = 26
+        val emissionDelayMillis = (1000f / hz).roundToLong()
+        val csvDataSource = CsvAccelerometerDataSource(
+            testContext,
+            csvFileName,
+            emissionDelayMillis = emissionDelayMillis, // data rate
+            skipHeaderLine = false      // no header in CSV
+        )
+
+        // Create and inject the test AccelerometerFlowManager
+        val testManager = AccelerometerFlowManager(
+            sharedScope = testAppScope,
+            dataSource = csvDataSource
+        )
+        MainActivity.testAccelerometerFlowManager = testManager
+        Log.d("RunningCsvTest", "Test AccelerometerFlowManager injected into MainActivity.")
+
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
+
+        // Wait 10 seconds
+        val processingDelayMillis = 12000L // 10 seconds
+        runBlocking { delay(processingDelayMillis) }
+
+        var actualActivityGuess = ""
+        scenario.onActivity { actualActivityGuess = it.currentActivityGuess }
+
+        assertTrue(
+            "Expected activity containing 'running' but got '$actualActivityGuess' after ${processingDelayMillis}ms",
+            actualActivityGuess.contains("running", ignoreCase = true)
+        )
+
+        scenario.close()
+    }
 }
