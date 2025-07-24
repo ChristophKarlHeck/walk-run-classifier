@@ -119,4 +119,37 @@ To get a local copy up and running, follow these simple steps.
 
 5.  **Continuous Updates:**
     The app continuously processes accelerometer data. As you continue your activity or switch to a different one, the displayed prediction and confidence score will update accordingly to reflect the current movement pattern. There are no buttons to press; the classification is automatic and ongoing.
-    
+
+## Model Details
+
+The machine learning model used in this application was trained to classify stationary, walking, and running activities based on accelerometer data.
+For comprehensive information regarding the model's architecture, training process, dataset used, and experimentation details, please refer to the dedicated model training repository:
+
+**➡️ [Human Activity Recognition Model Training Repository](https://github.com/ChristophKarlHeck/human-activity-recognition)**
+
+Below is a summary of the model's specifics as integrated into this Android application:
+
+-   **Model File:** The TensorFlow Lite model is located at `app/src/main/assets/model.tflite`.
+-   **Input:**
+    -   Type: Floating point numbers.
+    -   Shape: `[1, 260, 3]`
+        -   `1`: Batch size.
+        -   `260`: Number of time steps/samples in the window (10 seconds * 26 Hz).
+        -   `3`: Features per time step (x, y, z accelerometer values).
+    -   Preprocessing (within this Android app):
+        1.  Raw accelerometer (x, y, z) readings are taken in m/s².
+        2.  Converted to milli-g (mg) using standard gravity (9.81 m/s²).
+        3.  Clamped to a ±4000mg range.
+        4.  Collected into windows of 260 samples, with a 90% overlap between consecutive windows.
+        5.  Each value (x, y, z) in the window is then normalized by dividing by 4000.0f (resulting in values approximately between -1.0 and 1.0).
+-   **Output:**
+    -   Type: Floating point numbers representing probabilities.
+    -   Shape: `[1, 3]` (Batch size, Number of classes).
+    -   Interpretation: The output array contains the confidence scores for each activity class in the following order:
+        1.  Stationary
+        2.  Walking
+        3.  Running
+    -   The class with the highest score is chosen as the prediction.
+
+
+
