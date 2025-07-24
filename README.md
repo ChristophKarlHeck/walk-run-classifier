@@ -197,7 +197,7 @@ This data source allows for replaying accelerometer data from CSV files, primari
 
 The project is organized into several key packages under `com.example.walkrunclassifier` (the base package):
 
--   **`(root package)` / `com.example.walkrunclassifier`**:
+-   **`root` package / `com.example.walkrunclassifier`**:
     -   `MainActivity.kt`: The main entry point of the application.
         -   Initializes and manages the `ActivityClassifier` (for ML model inference) and `AccelerometerFlowManager` (for sensor data processing).
         -   Hosts the Jetpack Compose UI, displaying the number of processed sensor windows and the live activity classification.
