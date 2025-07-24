@@ -3,11 +3,24 @@
 An Android application that classifies stationary, walking, and running activity in real-time
 using accelerometer sensor data and an on-device TensorFlow Lite model.
 
-<!-- 
 **Quick Start:**
-- Getting Started with WalkRunClassifier: Clone, Install, and Test: [Link to your video when ready]
-- How to deploy and run on a real phone: [Link to your video when ready]
--->
+*   **Getting Started with WalkRunClassifier: Clone, Install, and Test (Video):** [https://youtu.be/5qFegHCgaCs]
+    Follow these steps to get the project running and verify with tests:
+
+    1.  **Clone the Repository:**
+        *   In Android Studio: `File > New > Project from Version Control...` and use the repository URL: `https://github.com/ChristophKarlHeck/walk-run-classifier.git`
+        *   Alternatively, use the command line: `git clone https://github.com/ChristophKarlHeck/walk-run-classifier.git` and then open the cloned project in Android Studio.
+    2.  **Sync Project:** Allow Android Studio to complete the Gradle sync process automatically.
+    3.  **(Optional but Recommended if Issues Arise):** If you encounter any unexpected errors or tests aren't recognized, try `File > Invalidate Caches...` (select "Invalidate and Restart").
+    4.  **Run Tests:**
+        *   Navigate to the test file: `app/src/androidTest/java/com/example/walkrunclassifier/ExampleInstrumentedTest.kt`
+        *   Click the **green play button** next to the class name `ExampleInstrumentedTest` to run all tests in the file.
+        *   Alternatively, click the play button next to individual test methods like `testStationaryActivity_fromCsv()`, `testWalkingActivity_fromCsv()`, or `testRunningActivity_fromCsv()` to run them separately.
+
+**Video Demonstration on real phone:**
+- Follow this link to deploy the app on your phone: https://developer.android.com/studio/run/device
+- Real field test (turn the volume on to hear me moving): [https://youtube.com/shorts/SAY-EZ35GX0] 
+
 
 ## Table of Contents
 
@@ -77,7 +90,7 @@ This project is a completed example showcasing:
 
 ## Getting Started
 
-To get a local copy up and running, follow these simple steps.
+The Quick Start section above provides the fastest path to getting started. For additional details and context, see the sections below.
 
 ### Prerequisites
 
@@ -88,7 +101,7 @@ To get a local copy up and running, follow these simple steps.
 
 ### Installation
 
-1.  **Clone the repository:**
+- **See Quick Start**
 
 
 ## Usage
@@ -161,7 +174,7 @@ This component is responsible for sourcing live accelerometer data from the Andr
 -   **Data Transformation:**
     1.  Receives raw sensor events (`SensorEvent`) where `event.values[0]`, `event.values[1]`, and `event.values[2]` represent acceleration on the x, y, and z axes in m/s².
     2.  Each of these raw m/s² values is immediately processed by the `convertAndClampToMilliG` utility function (from `SensorDataUtils.kt`). This function:
-        -   Converts the m/s² value to milli-g (mg) using the standard gravity constant (9.80665 m/s²).
+        -   Converts the m/s² value to milli-g (mg) using the standard gravity constant (9.81 m/s²).
         -   Clamps the resulting milli-g (mg) value to a range of ±4000mg since the sensor used for acquiring the training data has this resolution.
 -   **Output:** Emits a `Flow<AccelerometerData>`, where each `AccelerometerData` object contains:
     -   `timestamp`: The original timestamp from the `SensorEvent` (in nanoseconds).
