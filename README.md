@@ -5,7 +5,8 @@ using accelerometer sensor data and an on-device TensorFlow Lite model.
 
 **Quick Start:**
 *   **Getting Started with WalkRunClassifier: Clone, Install, and Test (Video):** [https://youtu.be/5qFegHCgaCs]
-    Follow these steps to get the project running and verify with tests:
+    
+* Follow these steps to get the project running and verify with tests:
 
     1.  **Clone the Repository:**
         *   In Android Studio: `File > New > Project from Version Control...` and use the repository URL: `https://github.com/ChristophKarlHeck/walk-run-classifier.git`
