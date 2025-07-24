@@ -78,9 +78,9 @@ This project is a completed example showcasing:
     - `androidx.lifecycle:lifecycle-viewmodel-compose` (Used in `MainActivity`)
 - Testing:
     - JUnit 4
-    - AndroidX Test (JUnit, Espresso Core)
+    - AndroidX Test (JUnit)
     - Compose UI Tests
-- [Android Studio](https://developer.android.com/studio) (Developed with Android Studio Iguana | 2023.2.1 or similar)
+- [Android Studio](https://developer.android.com/studio) (Developed with Android Studio Narwhal | 2025.1.1)
 
 ## Getting Started
 
