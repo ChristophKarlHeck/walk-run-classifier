@@ -19,11 +19,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import kotlin.math.roundToLong
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
+
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
 
@@ -75,7 +71,8 @@ class ExampleInstrumentedTest {
             dataSource = csvDataSource
         )
         MainActivity.testAccelerometerFlowManager = testManager
-        Log.d("StationaryCsvTest", "Test AccelerometerFlowManager injected into MainActivity.")
+        Log.d("StationaryCsvTest", "Test AccelerometerFlowManager " +
+                "injected into MainActivity.")
 
         val scenario = ActivityScenario.launch(MainActivity::class.java)
 
@@ -87,7 +84,8 @@ class ExampleInstrumentedTest {
         scenario.onActivity { actualActivityGuess = it.currentActivityClassification }
 
         assertTrue(
-            "Expected activity containing 'stationary' but got '$actualActivityGuess' after ${processingDelayMillis}ms",
+            "Expected activity containing 'stationary' " +
+                    "but got '$actualActivityGuess' after ${processingDelayMillis}ms",
             actualActivityGuess.contains("stationary", ignoreCase = true)
         )
 
@@ -115,7 +113,8 @@ class ExampleInstrumentedTest {
             dataSource = csvDataSource
         )
         MainActivity.testAccelerometerFlowManager = testManager
-        Log.d("WalkingCsvTest", "Test AccelerometerFlowManager injected into MainActivity.")
+        Log.d("WalkingCsvTest", "Test AccelerometerFlowManager " +
+                "injected into MainActivity.")
 
         val scenario = ActivityScenario.launch(MainActivity::class.java)
 
@@ -127,7 +126,8 @@ class ExampleInstrumentedTest {
         scenario.onActivity { actualActivityGuess = it.currentActivityClassification }
 
         assertTrue(
-            "Expected activity containing 'walking' but got '$actualActivityGuess' after ${processingDelayMillis}ms",
+            "Expected activity containing 'walking' but got '$actualActivityGuess' " +
+                    "after ${processingDelayMillis}ms",
             actualActivityGuess.contains("walking", ignoreCase = true)
         )
 
@@ -155,7 +155,8 @@ class ExampleInstrumentedTest {
             dataSource = csvDataSource
         )
         MainActivity.testAccelerometerFlowManager = testManager
-        Log.d("RunningCsvTest", "Test AccelerometerFlowManager injected into MainActivity.")
+        Log.d("RunningCsvTest", "Test AccelerometerFlowManager " +
+                "injected into MainActivity.")
 
         val scenario = ActivityScenario.launch(MainActivity::class.java)
 
@@ -167,7 +168,8 @@ class ExampleInstrumentedTest {
         scenario.onActivity { actualActivityGuess = it.currentActivityClassification }
 
         assertTrue(
-            "Expected activity containing 'running' but got '$actualActivityGuess' after ${processingDelayMillis}ms",
+            "Expected activity containing 'running' but got '$actualActivityGuess' " +
+                    "after ${processingDelayMillis}ms",
             actualActivityGuess.contains("running", ignoreCase = true)
         )
 

@@ -6,7 +6,6 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
-import androidx.compose.ui.input.key.type
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
@@ -41,6 +40,7 @@ class RealAccelerometerDataSource(
                     val y_mg = convertAndClampToMilliG(event.values[1])
                     val z_mg = convertAndClampToMilliG(event.values[2])
 
+                    // passed to the flow pipeline
                     trySend(
                         AccelerometerData(
                             timestamp = event.timestamp,
