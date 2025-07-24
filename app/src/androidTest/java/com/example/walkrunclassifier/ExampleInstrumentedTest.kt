@@ -84,7 +84,7 @@ class ExampleInstrumentedTest {
         runBlocking { delay(processingDelayMillis) }
 
         var actualActivityGuess = ""
-        scenario.onActivity { actualActivityGuess = it.currentActivityGuess }
+        scenario.onActivity { actualActivityGuess = it.currentActivityClassification }
 
         assertTrue(
             "Expected activity containing 'stationary' but got '$actualActivityGuess' after ${processingDelayMillis}ms",
@@ -124,7 +124,7 @@ class ExampleInstrumentedTest {
         runBlocking { delay(processingDelayMillis) }
 
         var actualActivityGuess = ""
-        scenario.onActivity { actualActivityGuess = it.currentActivityGuess }
+        scenario.onActivity { actualActivityGuess = it.currentActivityClassification }
 
         assertTrue(
             "Expected activity containing 'walking' but got '$actualActivityGuess' after ${processingDelayMillis}ms",
@@ -164,7 +164,7 @@ class ExampleInstrumentedTest {
         runBlocking { delay(processingDelayMillis) }
 
         var actualActivityGuess = ""
-        scenario.onActivity { actualActivityGuess = it.currentActivityGuess }
+        scenario.onActivity { actualActivityGuess = it.currentActivityClassification }
 
         assertTrue(
             "Expected activity containing 'running' but got '$actualActivityGuess' after ${processingDelayMillis}ms",
