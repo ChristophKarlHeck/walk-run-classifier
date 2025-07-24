@@ -96,4 +96,27 @@ To get a local copy up and running, follow these simple steps.
 ### Installation
 
 1.  **Clone the repository:**
+
+
+## Usage
+
+1.  **Launch the App:**
+    Find and tap the "WalkRunClassifier" icon in your app drawer or on your home screen.
+
+2.  **Initial State:**
+    Upon launching, the screen will initially display "Activity: initializing". This means the app is active and warming up by collecting the initial accelerometer data needed for the first classification window.
+
+3.  **Perform an Activity:**
+    To see the app in action, simply begin one of the following activities:
+    *   Stay **Stationary** (e.g., sitting or standing still).
+    *   Start **Walking**.
+    *   Start **Running** or jogging.
+
+4.  **View Classification:**
+    After a brief period (new window classification every second), the display will update to show:
+    *   The **Predicted Activity**: "Stationary", "Walking", or "Running".
+    *   The **Confidence Score**: A value in parentheses (e.g., `(0.92)`) indicating how confident the model is in its prediction.
+
+5.  **Continuous Updates:**
+    The app continuously processes accelerometer data. As you continue your activity or switch to a different one, the displayed prediction and confidence score will update accordingly to reflect the current movement pattern. There are no buttons to press; the classification is automatic and ongoing.
     
