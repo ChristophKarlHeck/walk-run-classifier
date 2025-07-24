@@ -7,10 +7,7 @@ import java.io.FileInputStream
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.channels.FileChannel
-
-// Define a simple data class for your accelerometer readings if you don't have one
-// This should match the structure of data coming from your AccelerometerFlowManager
-data class AccelerometerReading(val x: Float, val y: Float, val z: Float, val timestamp: Long = 0L)
+import com.example.walkrunclassifier.sensors.AccelerometerData
 
 class ActivityClassifier(
     context: Context,
@@ -86,7 +83,7 @@ class ActivityClassifier(
      * @param readingsList A list of AccelerometerReading objects forming a window.
      * @return ByteBuffer ready for the interpreter, or null if input is invalid or preprocessing fails.
      */
-    private fun preprocessInput(readingsList: List<AccelerometerReading>): ByteBuffer? {
+    private fun preprocessInput(readingsList: List<AccelerometerData>): ByteBuffer? {
         if (readingsList.size != modelExpectedInputSamples) {
             Log.w(TAG, "Input data size (${readingsList.size}) doesn't match model's expected input size ($modelExpectedInputSamples).")
             // In a real app, you might pad with zeros or truncate if your model can handle it.
@@ -120,7 +117,7 @@ class ActivityClassifier(
      * @return A Pair containing the predicted class label (String) and its confidence (Float),
      *         or null if classification fails or the interpreter isn't initialized.
      */
-    fun classify(inputWindowData: List<AccelerometerReading>): Pair<String, Float>? {
+    fun classify(inputWindowData: List<AccelerometerData>): Pair<String, Float>? {
         if (interpreter == null) {
             Log.e(TAG, "Interpreter not initialized. Cannot classify.")
             return null

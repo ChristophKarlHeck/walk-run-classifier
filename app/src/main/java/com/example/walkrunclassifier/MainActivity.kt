@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import com.example.walkrunclassifier.sensors.AccelerometerFlowManager
 import com.example.walkrunclassifier.sensors.AccelerometerWindow
-import com.example.walkrunclassifier.sensors.AccelerometerData // Ensure this is imported
 import com.example.walkrunclassifier.sensors.RealAccelerometerDataSource // Import Real
 import com.example.walkrunclassifier.ui.theme.WalkRunClassifierTheme
 import kotlinx.coroutines.Job
@@ -27,7 +26,7 @@ import kotlinx.coroutines.launch
 import com.example.walkrunclassifier.ml.ActivityClassifier
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.example.walkrunclassifier.ml.AccelerometerReading as ModelInputReading
+import com.example.walkrunclassifier.sensors.AccelerometerData as ModelInputReading
 
 // Constants
 private const val DESIRED_WINDOW_DURATION_SECONDS = 10 // 10s
@@ -53,7 +52,7 @@ class MainActivity : ComponentActivity() {
     // UI State
     var processedWindowCount by mutableStateOf(0) // Made public for potential test access, but not ideal
         private set // Restrict external modification
-    var currentActivityGuess by mutableStateOf("Initializing...") // Made public for test access
+    var currentActivityGuess by mutableStateOf("initializing") // Made public for test access
         private set  // Restrict external modification
 
 
@@ -149,10 +148,10 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch(Dispatchers.Default) { // Use Default for CPU-intensive work
             val modelInputData = window.readings.map { accData -> // No need to specify AccelerometerData type here explicitly
                 ModelInputReading( // Alias for ml.AccelerometerReading
+                    timestamp = accData.timestamp,
                     x = accData.x,
                     y = accData.y,
                     z = accData.z,
-                    timestamp = accData.timestamp
                 )
             }
 
