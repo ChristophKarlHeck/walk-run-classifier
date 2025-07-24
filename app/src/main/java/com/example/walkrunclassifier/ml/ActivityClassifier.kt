@@ -1,4 +1,4 @@
-package com.example.walkrunclassifier.ml // Or your preferred package
+package com.example.walkrunclassifier.ml
 
 import android.content.Context
 import android.util.Log
@@ -74,7 +74,6 @@ class ActivityClassifier(
 
     /**
      * Prepares the raw accelerometer data window to match the model's expected input format.
-     * THIS IS THE MOST CRITICAL AND MODEL-SPECIFIC PART.
      *
      * @param readingsList A list of AccelerometerReading objects forming a window.
      * @return ByteBuffer ready for the interpreter, or null

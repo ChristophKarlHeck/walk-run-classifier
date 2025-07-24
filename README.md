@@ -193,6 +193,38 @@ This data source allows for replaying accelerometer data from CSV files, primari
         -   `timestamp`: A generated timestamp (nanoseconds).
         -   `x`, `y`, `z`: The floating-point values read directly from the current line of the CSV file.
 
+## Code Structure
+
+The project is organized into several key packages under `com.example.walkrunclassifier` (the base package):
+
+-   **`(root package)` / `com.example.walkrunclassifier`**:
+    -   `MainActivity.kt`: The main entry point of the application.
+        -   Initializes and manages the `ActivityClassifier` (for ML model inference) and `AccelerometerFlowManager` (for sensor data processing).
+        -   Hosts the Jetpack Compose UI, displaying the number of processed sensor windows and the live activity classification.
+        -   Collects windowed accelerometer data using Kotlin Flows and `lifecycleScope`.
+        -   Processes data windows with the classifier and updates UI state (e.g., `currentActivityClassification`, `processedWindowCount`) directly within the Activity.
+        -   Includes a mechanism to use a test data source (`testAccelerometerFlowManager`) for instrumented testing.
+
+-   **`ml` package (`com.example.walkrunclassifier.ml`)**:
+    -   `ActivityClassifier.kt`: Handles all TensorFlow Lite model interactions. It loads `model.tflite` from assets, preprocesses input windows of accelerometer data (normalizing to [-1,1]), runs inference, interprets the output probabilities into activity labels (stationary, walking, running) with confidence scores, and manages TFLite resources.
+    
+-   **`sensors` package (`com.example.walkrunclassifier.sensors`)**:
+    -   `AccelerometerData.kt`: A data class representing a single accelerometer reading (timestamp, x, y, z values in milli-g).
+    -   `AccelerometerDataSource.kt`: An interface defining the contract for providing a `Flow` of `AccelerometerData`.
+    -   `RealAccelerometerDataSource.kt`: Implementation of `AccelerometerDataSource` that provides real-time data from the device's hardware accelerometer. Handles sensor registration, data conversion (m/s² to milli-g and clamping), and emits `AccelerometerData`.
+    -   `AccelerometerFlowManager.kt`: Manages the stream of `AccelerometerData` from a data source. It applies transformations like buffering and then windows the continuous data stream into segments (e.g., 10-second windows with 90% overlap) suitable for the `ActivityClassifier`.
+    -   `AccelerometerWindow.kt`: A data class representing a window of accelerometer data (a list of `AccelerometerData` points) ready to be fed into the model after normalization.
+
+-   **`testutils` package (`com.example.walkrunclassifier.testutils`)**:
+    -   *(Assuming `CsvAccelerometerDataSource.kt` is here, as per previous discussions. If it's elsewhere, like directly in `sensors`, please clarify.)*
+    -   `CsvAccelerometerDataSource.kt`: An implementation of `AccelerometerDataSource` used for testing. It reads accelerometer data from CSV files stored in `app/src/main/assets/`, allowing for repeatable test scenarios by simulating sensor input.
+
+-   **`ui.theme` package (`com.example.walkrunclassifier.ui.theme`)**:
+    -   `Color.kt`, `Theme.kt`, `Type.kt`: Standard Jetpack Compose files defining the application's color palette, overall theme, and typography.
+
+-   **`util` package (`com.example.walkrunclassifier.util`)**:
+    -   `SensorDataUtils.kt`: Contains utility functions related to sensor data, most notably `convertAndClampToMilliG` for converting raw accelerometer readings to clamped milli-g values.
+    -   `FlowExtensions.kt`: *(If you have specific Kotlin Flow extension functions that are generally useful, briefly mention their purpose here. If it's very specific, it might not need a general mention).* Contains utility extension functions for working with Kotlin Flows, potentially for custom buffering or timing operations.
 
 
 
