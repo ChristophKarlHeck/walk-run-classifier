@@ -36,7 +36,7 @@ Optional: Add a screenshot or a short GIF of the app in action here
 WalkRunClassifier provides a simple interface to demonstrate on-device activity recognition.
 It leverages the built-in accelerometer to gather motion data, preprocesses this data into windows,
 and then feeds it to a pre-trained TensorFlow Lite model to predict whether the user is 
-stationary, walking, or running. The predicted activity and its confidence score are 
+stationary, walking, or running. The number of processed windows, predicted activity and its confidence score are 
 displayed on the screen.
 
 This project is a completed example showcasing:
@@ -55,7 +55,7 @@ This project is a completed example showcasing:
     - Windowing of sensor data (e.g., 10-second windows with 90% overlap).
     - Normalization of windowed data (division by 4000.0f) before model input.
 - On-device classification using a pre-trained TensorFlow Lite model.
-- Display of predicted activity label (Stationary, Walking, Running) and confidence score plus the number of processed windows.
+- Display of predicted activity label (stationary, walking, running) and confidence score plus the number of processed windows.
 - CSV-based test data replay capability for development and debugging (used in Instrumented Tests).
 
 ## Built With
