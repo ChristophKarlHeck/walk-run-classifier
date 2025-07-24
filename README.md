@@ -166,10 +166,10 @@ This component is responsible for sourcing live accelerometer data from the Andr
     -   Configured via a `desiredFrequencyHz` parameter passed to its constructor (e.g., 26 Hz).
     -   This frequency is converted into a sampling period in microseconds, which is then requested from the `SensorManager`.
 -   **Data Transformation:**
-    1.  Receives raw sensor events (`SensorEvent`) where `event.values[0]`, `event.values[1]`, and `event.values[2]` represent acceleration on the x, y, and z axes in meters per second squared (m/s²).
+    1.  Receives raw sensor events (`SensorEvent`) where `event.values[0]`, `event.values[1]`, and `event.values[2]` represent acceleration on the x, y, and z axes in m/s².
     2.  Each of these raw m/s² values is immediately processed by the `convertAndClampToMilliG` utility function (from `SensorDataUtils.kt`). This function:
         -   Converts the m/s² value to milli-g (mg) using the standard gravity constant (9.80665 m/s²).
-        -   Clamps the resulting milli-g value to a range of ±4000mg.
+        -   Clamps the resulting milli-g value to a range of ±4000mg since the sensor used for acquiring the training data has this resolution.
 -   **Output:** Emits a `Flow<AccelerometerData>`, where each `AccelerometerData` object contains:
     -   `timestamp`: The original timestamp from the `SensorEvent` (in nanoseconds).
     -   `x`, `y`, `z`: The accelerometer readings converted to milli-g and clamped.
