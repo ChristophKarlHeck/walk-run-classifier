@@ -3,8 +3,6 @@
 An Android application that classifies stationary, walking, and running activity in real-time
 using accelerometer sensor data and an on-device TensorFlow Lite model.
 
-**Repository:** [https://github.com/ChristophKarlHeck/walk-run-classifier.git](https://github.com/ChristophKarlHeck/walk-run-classifier.git)
-
 <!-- 
 Optional: Add a screenshot or a short GIF of the app in action here 
 ![App Screenshot](docs/images/app_screenshot.png) 
