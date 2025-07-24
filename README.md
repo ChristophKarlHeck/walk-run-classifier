@@ -216,15 +216,14 @@ The project is organized into several key packages under `com.example.walkruncla
     -   `AccelerometerWindow.kt`: A data class representing a window of accelerometer data (a list of `AccelerometerData` points) ready to be fed into the model after normalization.
 
 -   **`testutils` package (`com.example.walkrunclassifier.testutils`)**:
-    -   *(Assuming `CsvAccelerometerDataSource.kt` is here, as per previous discussions. If it's elsewhere, like directly in `sensors`, please clarify.)*
     -   `CsvAccelerometerDataSource.kt`: An implementation of `AccelerometerDataSource` used for testing. It reads accelerometer data from CSV files stored in `app/src/main/assets/`, allowing for repeatable test scenarios by simulating sensor input.
 
 -   **`ui.theme` package (`com.example.walkrunclassifier.ui.theme`)**:
     -   `Color.kt`, `Theme.kt`, `Type.kt`: Standard Jetpack Compose files defining the application's color palette, overall theme, and typography.
 
 -   **`util` package (`com.example.walkrunclassifier.util`)**:
-    -   `SensorDataUtils.kt`: Contains utility functions related to sensor data, most notably `convertAndClampToMilliG` for converting raw accelerometer readings to clamped milli-g values.
-    -   `FlowExtensions.kt`: *(If you have specific Kotlin Flow extension functions that are generally useful, briefly mention their purpose here. If it's very specific, it might not need a general mention).* Contains utility extension functions for working with Kotlin Flows, potentially for custom buffering or timing operations.
+    -   `SensorDataUtils.kt`: Contains utility function `convertAndClampToMilliG` for converting raw accelerometer readings to clamped milli-g values.
+    -   `FlowExtensions.kt`: Contains Kotlin Flow extension functions. Includes `customWindowed(size: Int, step: Int)`: A custom operator that groups elements from an upstream flow into lists of a fixed size (representing a sliding window). The `step` parameter defines how many elements the window slides forward before emitting the next list. This is used by `AccelerometerFlowManager` to create overlapping windows of sensor data.
 
 
 
