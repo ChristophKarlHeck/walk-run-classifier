@@ -29,7 +29,6 @@ Optional: Add a screenshot or a short GIF of the app in action here
     - [Test Data](#test-data-csvaccelerometerdatasourcekt)
 - [Code Structure](#code-structure)
 - [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 ## About The Project
 
@@ -197,7 +196,7 @@ This data source allows for replaying accelerometer data from CSV files, primari
 
 The project is organized into several key packages under `com.example.walkrunclassifier` (the base package):
 
--   **`root` package / `com.example.walkrunclassifier`**:
+-   **`root` package (`com.example.walkrunclassifier`)**:
     -   `MainActivity.kt`: The main entry point of the application.
         -   Initializes and manages the `ActivityClassifier` (for ML model inference) and `AccelerometerFlowManager` (for sensor data processing).
         -   Hosts the Jetpack Compose UI, displaying the number of processed sensor windows and the live activity classification.
@@ -226,4 +225,6 @@ The project is organized into several key packages under `com.example.walkruncla
     -   `FlowExtensions.kt`: Contains Kotlin Flow extension functions. Includes `customWindowed(size: Int, step: Int)`: A custom operator that groups elements from an upstream flow into lists of a fixed size (representing a sliding window). The `step` parameter defines how many elements the window slides forward before emitting the next list. This is used by `AccelerometerFlowManager` to create overlapping windows of sensor data.
 
 
+## License
 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
